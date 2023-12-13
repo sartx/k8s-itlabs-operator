@@ -1,14 +1,46 @@
-class PgConnectorCrdDoesNotExist(Exception):
+from validation.exceptions import AnnotationValidatorMissedRequiredException, AnnotationValidatorEmptyValueException, \
+    ConnectorError
+
+
+class PostgresConnectorError(ConnectorError):
     pass
 
 
-class UnknownVaultPathInPgConnector(Exception):
+class PostgresConnectorApplicationError(PostgresConnectorError):
     pass
 
 
-class NotMatchingUsernames(Exception):
+class PostgresConnectorInfrastructureError(PostgresConnectorError):
     pass
 
 
-class NotMatchingDbNames(Exception):
+class PgConnectorCrdDoesNotExist(PostgresConnectorError):
+    pass
+
+
+class PgConnectorReadonlyUsernameIsNotSet(PostgresConnectorError):
+    pass
+
+
+class PgConnectorReadonlyUsernameDoesNotExist(PostgresConnectorError):
+    pass
+
+
+class UnknownVaultPathInPgConnector(PostgresConnectorError):
+    pass
+
+
+class NotMatchingUsernames(PostgresConnectorError):
+    pass
+
+
+class NotMatchingDbNames(PostgresConnectorError):
+    pass
+
+
+class PgConnectorMissingRequiredAnnotationError(PostgresConnectorError, AnnotationValidatorMissedRequiredException):
+    pass
+
+
+class PgConnectorAnnotationEmptyValueError(PostgresConnectorError, AnnotationValidatorEmptyValueException):
     pass
